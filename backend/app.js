@@ -16,6 +16,7 @@ app.use("*",cors({
 //Import all routes
 const auth = require('./routes/auth');
 const event = require('./routes/event');
+const userEvents = require('./routes/userEvent');
 
 
 
