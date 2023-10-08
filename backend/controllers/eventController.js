@@ -4,10 +4,10 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 //Register an event
 exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
-        const {name, eventStartDate, eventEndDate, host, location, description, imageOne, imageTwo, xToEarn} = req.body;
+        const {name, eventStartDate, eventEndDate, host, location, description, xToEarn, price} = req.body;
 
         //whether user enterd email and password
-        if(!name || !eventStartDate || !eventEndDate, !host, !location, !description, !xToEarn){
+        if(!name || !eventStartDate || !eventEndDate, !host, !location, !description, !xToEarn, !price){
             return next(new ErrorHandler('Please enter event details properly', 400));
         }
 
@@ -18,9 +18,8 @@ exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
             host,
             location,
             description,
-            imageOne,
-            imageTwo,
-            xToEarn
+            xToEarn,
+            price
         })
 
         
@@ -30,6 +29,27 @@ exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
         })
     }
 )
+
+//update event before image
+
+exports.updateBeforeImage = catchAsyncErrors(async(req, res, next) => {
+    const event = await Event.findById(req.event.id)
+    if (!event){
+        return next(new ErrorHandler('there not a such event', 404))
+    }
+
+    event.imageOne = req.beforeImage;
+    await event.save();
+
+    res.status(200).json({
+        success:true,
+        message: "Image added successfully"
+    })
+
+
+
+
+})
 
 // gives the event by event id
 exports.getEventById = catchAsyncErrors( async(req, res, next) => {

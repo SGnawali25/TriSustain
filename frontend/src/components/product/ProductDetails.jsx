@@ -19,7 +19,7 @@ const ProductDetails = () => {
     
     const params = useParams()
 
-    const {user} = useSelector(state => state.auth);
+    const {events} = useSelector(state => state.all_events);
 
     useEffect(() => {
 
