@@ -112,7 +112,7 @@ const EventDescription = () => {
                         <h1 className="mb-3">Upload Images</h1>
 
                         <div className="form-group">
-                            <label htmlFor="custom-file">Avatar</label>
+                            <label htmlFor="custom-file">Before Image</label>
                             <div className="d-flex align-items-center">
                                 <div>
                                     <figure className='avatar mr-3 item-rt1'>
