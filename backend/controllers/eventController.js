@@ -4,8 +4,7 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
 //Register an event
 exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
-        const {name, eventStartDate, eventEndDate, host, location, description, xToEarn, price} = req.body;
-
+        const {name, eventStartDate, eventEndDate, host, location, description, xToEarn, price, eventType} = req.body;
         //whether user enterd email and password
         if(!name || !eventStartDate || !eventEndDate, !host, !location, !description, !xToEarn, !price){
             return next(new ErrorHandler('Please enter event details properly', 400));
@@ -19,7 +18,8 @@ exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
             location,
             description,
             xToEarn,
-            price
+            price,
+            eventType: eventType
         })
 
         
@@ -53,12 +53,34 @@ exports.updateBeforeImage = catchAsyncErrors(async(req, res, next) => {
 
 // gives the event by event id
 exports.getEventById = catchAsyncErrors( async(req, res, next) => {
-    const event = await Event.findById(req.event.id);
+    const event = await Event.findById(req.params.id);
 
     res.status(200).json({
         success: true,
         event
     })
+})
+
+//update event
+exports.updateEvent = catchAsyncErrors( async(req, res, next) => {
+    const {eventId, userId} = req.body
+    let event = await Event.findById(req.body.eventId);
+
+    if (!event){
+        return next(new ErrorHandler('there is not a such event', 404))
+    }
+
+    event.registration = true;
+    event.registrar = userId
+    await event.save();
+
+    event = await Event.findById(req.body.id);
+
+    res.status(200).json({
+        success: true,
+        event
+    })
+
 })
 
 // gives all events
@@ -70,3 +92,48 @@ exports.getAllEvents = catchAsyncErrors( async(req, res, next) => {
         events
     })
 })
+
+
+// Use the api keys by specifying your api key and api secret
+
+
+//Register an event
+exports.uploadFirstPicInEvent = catchAsyncErrors( async(req, res, next) => {
+    const pinataSDK = require('@pinata/sdk');
+    const fs = require("fs");
+    const pinata = new pinataSDK({ pinataApiKey: '11a1d8ac65b3f07d91e5', pinataSecretApiKey: '35b263947f09aaed8f5bb1b21ccf95c95057183e8f28e94ffef8f03d9dbf8d22' });
+
+    const {imageOne} = req.body;
+    console.log(req.body);
+
+
+    if(!imageOne){
+            return next(new ErrorHandler('Please enter event details properly', 400));
+        }
+
+        const event = await Event.updateOne({_id: req.params.e_id},
+            {set: req.body});
+
+        const readableStreamForFile = fs.createReadStream(req.body.imageOne);
+        const options = {
+            pinataMetadata: {
+                name: "TempImage",
+                keyvalues: {
+                    customKey: 'customValue',
+                    customKey2: 'customValue2'
+                }
+            },
+            pinataOptions: {
+                cidVersion: 0
+            }
+        };
+
+        const response = await pinata.pinFileToIPFS(readableStreamForFile, options)
+        console.log(response)
+
+        res.status(200).json({
+            success:"true",
+            event
+        })
+    }
+)

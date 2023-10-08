@@ -25,17 +25,13 @@ const Header = () => {
             <div className="col-12 col-md-3">
                 <div className="navbar-brand">
                     <Link to='/'>
-                        <img src="/images/SmartShopperLogo.png" width={180}/>
+                        <img src="/images/trisustain.jpeg" width={180}/>
                     </Link>
                 </div>
             </div>
 
 
             <div className="col-12 col-md-3 mt-4 mt-md-0 text-center">
-                <Link to= '/cart' style={{textDecoration: 'none'}}>
-                    <span id="cart" className="ml-3">Cart</span>
-                    <span className="ml-1" id="cart_count">2</span>
-                </Link>
 
                 {user ? (
                         <div className="ml-4 dropdown d-inline">
@@ -53,10 +49,10 @@ const Header = () => {
 
                             <div className="dropdown-menu" aria-labelledby="dropDownMenuButton">
 
-                                {user && user.role === 'admin' && (
-                                    <Link className="dropdown-item" to="/dashboard">Dashboard</Link>
-                                )}
-                                <Link className="dropdown-item" to="/orders/me">Orders</Link>
+                                {user && user.role === 'user' ?(
+                                    <Link className="dropdown-item" to="/events/selected">Events Selected</Link>
+                                ):<Link className="dropdown-item" to="/events/organized">Events Organized</Link>}
+                                {/* <Link className="dropdown-item" to="/events/me">Events</Link> */}
                                 <Link className="dropdown-item" to="/me">Profile</Link>
                                 <Link className="dropdown-item text-danger" to="/"  onClick={logoutHandler}>
                                     Logout

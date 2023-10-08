@@ -43,6 +43,18 @@ const eventSchema = new mongoose.Schema({
     price:{
         type: Number,
         required: true
+    },
+    eventType:{
+        type: String,
+        required:  true
+    },
+    registration:{
+        type: Boolean,
+        default: false
+    },
+    registrar: {
+        type: mongoose.Schema.ObjectId,
+        ref: "user",
     }
 })
 module.exports = mongoose.model('Event', eventSchema);

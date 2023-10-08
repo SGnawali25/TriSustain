@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 
-const Product = ({product, col}) => {
+const Product = ({product, col, type}) => {
 
     const {user} = useSelector(state => state.auth);
   return (
@@ -16,7 +16,7 @@ const Product = ({product, col}) => {
               /> */}
               <div className="card-body d-flex flex-column">
                   <h5 className="card-title">
-                      {user.role == "host" ?<Link to={`/create/event`}>{product.name}</Link> : <Link to={`/events`}>{product.name}</Link>}
+                      {user.role == "host" ?<Link to={`/create/event/${type}`} >{product.name}</Link> : <Link to={`/events/${type}`}>{product.name}</Link>}
                   </h5>
                   {/* <div className="ratings mt-auto">
                       <div className="rating-outer">

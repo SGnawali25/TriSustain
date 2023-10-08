@@ -35,8 +35,8 @@ function App() {
             <Route path='/lgn' Component={Login} />
             <Route path='/register' Component={Register}/>
             <Route path='/me' Component={Profile} />
-            <Route path='/create/event' Component={createEvent} />
-            <Route path='/events' Component={allEvents} />
+            <Route path='/create/event/:type' Component={createEvent} />
+            <Route path='/events/:type' Component={allEvents} />
             <Route path= "/event/:id" Component={EventDescription} />
           </Routes>
         </div>

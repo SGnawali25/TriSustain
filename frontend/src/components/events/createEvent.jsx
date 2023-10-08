@@ -6,15 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAlert } from 'react-alert';
 import { create_event } from '../../actions/eventActions';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 const createEvent = () => {
+    const params = useParams();
+    const type = params.type;
 
     const alert = useAlert();
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const [event, setEvent] = useState({name: "", eventStartDate:"", eventEndDate:"", description :"", location :"", xToEarn: "", host: "", price: ""})
+    const [event, setEvent] = useState({name: "", eventStartDate:"", eventEndDate:"", description :"", location :"", xToEarn: "", host: "", price: "", eventType:""})
 
     const setEvents = (e) => {
 
@@ -28,9 +31,11 @@ const createEvent = () => {
         )
     }
 
+    event.eventType = type;
+
     const {user} = useSelector(state => state.auth)
     if (user){
-        event.host = user;
+        event.host = user.name;
     }else{
         event.host = null;
     }

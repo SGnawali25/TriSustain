@@ -5,7 +5,10 @@ import {
     CLEAR_ERRORS, 
     LOAD_EVENTS_LOADING,
     LOAD_EVENTS_SUCCESS,
-    LOAD_EVENTS_FAIL
+    LOAD_EVENTS_FAIL,
+    LOAD_EVENT_LOADING,
+    LOAD_EVENT_SUCCESS,
+    LOAD_EVENT_FAIL
 } from '../constants/eventConstants';
 
 
@@ -62,6 +65,39 @@ export const eventsReducer = (state = {events: []}, action) =>{
                 ...state,
                 loading: false,
                 events: null
+            }
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
+
+        default:
+            return state;
+    }
+}
+
+export const eventReducer = (state = {event: {}}, action) =>{
+    switch(action.type) {
+        case LOAD_EVENT_LOADING:
+            return{
+                ...state,
+                loading: true
+            }
+
+        case LOAD_EVENT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                event: action.payload
+            }
+
+        case LOAD_EVENT_FAIL:
+            return {
+                ...state,
+                loading: false,
+                event: null
             }
 
         case CLEAR_ERRORS:

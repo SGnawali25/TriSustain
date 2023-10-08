@@ -54,7 +54,7 @@ const Home = () => {
                                     <div className="col-6 col-md-9">
                                         <div className="row">
                                             {products.map(product => (
-                                                <Product key={product._id} product={product} col={4} />
+                                                <Product key={product._id} product={product} col={4} type={product.name}/>
                                             ))}
                                         </div>
                                     </div>
