@@ -35,9 +35,13 @@ const Register = () => {
         }
     }, [dispatch, alert, isAuthenticated, error]);
 
+    // const connex = new Connex({
+    //     node: 'https://mainnet.vechain.net/'
+    // })
 
     const submitHandler = (e) => {
         e.preventDefault();
+        // Connex.thor.link().open();
         dispatch(register(name, email, password, role));
         
     }
