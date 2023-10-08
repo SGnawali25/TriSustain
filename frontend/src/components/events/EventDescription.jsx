@@ -56,6 +56,19 @@ const EventDescription = () => {
     }
   }
 
+  const onChange = (e) => {
+        
+    const reader = new FileReader();
+
+    reader.onload = () => {
+        if (reader.readyState === 2){
+            setBeforeImage(reader.result)
+        }
+
+    }
+    reader.readAsDataURL(e.target.files[0])
+}
+
 
   return (
     <Fragment>
@@ -99,15 +112,35 @@ const EventDescription = () => {
                         <h1 className="mb-3">Upload Images</h1>
 
                         <div className="form-group">
-                            <label htmlFor="name_field">Before Image</label>
-                            <input
-                                type="file"
-                                id="name_field"
-                                className="form-control"
-                                name='beforeImage'
-                                value={beforeImage}
-                                onChange={(e) => setBeforeImage(e.target.value)}
-                            />
+                            <label htmlFor="custom-file">Avatar</label>
+                            <div className="d-flex align-items-center">
+                                <div>
+                                    <figure className='avatar mr-3 item-rt1'>
+                                        <img 
+                                        src={beforeImage} 
+                                        alt="Avatar Preview"
+                                        className='rounded-circle' 
+                                        />
+
+                                    </figure>
+                              </div>
+                              <div className="custom-file">
+                                  <input
+                                      type="file"
+                                      name='avatar'
+                                      maxLength="10MB"
+                                      accept = ".jpg, .png, .pdf"
+                                      className='cutom-file-input'
+                                      id='custom-file'
+                                    //   accept='/iamges/*'
+                                      onChange={onChange}
+                                  />
+                                  <label htmlFor="custom-file" className="custom-file-label">
+                                      Choose Avatar
+                                  </label>
+                              </div>
+                          </div>
+        
                         </div>
 
                         <div className="form-group">

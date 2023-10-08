@@ -32,24 +32,24 @@ exports.registerEvent = catchAsyncErrors( async(req, res, next) => {
 
 //update event before image
 
-exports.updateBeforeImage = catchAsyncErrors(async(req, res, next) => {
-    const event = await Event.findById(req.event.id)
-    if (!event){
-        return next(new ErrorHandler('there not a such event', 404))
-    }
+// exports.updateBeforeImage = catchAsyncErrors(async(req, res, next) => {
+//     const event = await Event.findById(req.event.id)
+//     if (!event){
+//         return next(new ErrorHandler('there not a such event', 404))
+//     }
 
-    event.imageOne = req.beforeImage;
-    await event.save();
+//     event.imageOne = req.beforeImage;
+//     await event.save();
 
-    res.status(200).json({
-        success:true,
-        message: "Image added successfully"
-    })
-
-
+//     res.status(200).json({
+//         success:true,
+//         message: "Image added successfully"
+//     })
 
 
-})
+
+
+// })
 
 // gives the event by event id
 exports.getEventById = catchAsyncErrors( async(req, res, next) => {
@@ -104,36 +104,35 @@ exports.uploadFirstPicInEvent = catchAsyncErrors( async(req, res, next) => {
     const pinata = new pinataSDK({ pinataApiKey: '11a1d8ac65b3f07d91e5', pinataSecretApiKey: '35b263947f09aaed8f5bb1b21ccf95c95057183e8f28e94ffef8f03d9dbf8d22' });
 
     const {imageOne} = req.body;
-    console.log(req.body);
 
 
     if(!imageOne){
             return next(new ErrorHandler('Please enter event details properly', 400));
         }
 
-        const event = await Event.updateOne({_id: req.params.e_id},
-            {set: req.body});
 
-        const readableStreamForFile = fs.createReadStream(req.body.imageOne);
-        const options = {
-            pinataMetadata: {
-                name: "TempImage",
-                keyvalues: {
-                    customKey: 'customValue',
-                    customKey2: 'customValue2'
-                }
-            },
-            pinataOptions: {
-                cidVersion: 0
+    const readableStreamForFile = fs.createReadStream("profile.png");
+    const options = {
+        pinataMetadata: {
+            name: "TempImage",
+            keyvalues: {
+                customKey: 'customValue',
+                customKey2: 'customValue2'
             }
-        };
+        },
+        pinataOptions: {
+            cidVersion: 0
+        }
+    };
 
         const response = await pinata.pinFileToIPFS(readableStreamForFile, options)
-        console.log(response)
+
+        const check =  await Event.findByIdAndUpdate(req.params.e_id, {imageOne: response.IpfsHash})
 
         res.status(200).json({
             success:"true",
-            event
+            response
+            
         })
     }
 )
