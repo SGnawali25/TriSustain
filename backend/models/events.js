@@ -39,6 +39,10 @@ const eventSchema = new mongoose.Schema({
     xToEarn: {
         type: String,
         required: [true, 'Please enter your xToEarn']
+    },
+    price:{
+        type: Number,
+        required: true
     }
 })
 module.exports = mongoose.model('Event', eventSchema);

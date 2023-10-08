@@ -13,6 +13,9 @@ import Profile from './components/user/Profile';
 
 import { loadUser } from './actions/userActions';
 import store from './store'; 
+import createEvent from './components/events/createEvent';
+import allEvents from './components/events/allEvents';
+import EventDescription from './components/events/EventDescription';
 
 
 function App() {
@@ -32,6 +35,9 @@ function App() {
             <Route path='/lgn' Component={Login} />
             <Route path='/register' Component={Register}/>
             <Route path='/me' Component={Profile} />
+            <Route path='/create/event' Component={createEvent} />
+            <Route path='/events' Component={allEvents} />
+            <Route path= "/event/:id" Component={EventDescription} />
           </Routes>
         </div>
         <Footer />
