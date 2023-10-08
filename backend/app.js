@@ -15,9 +15,13 @@ app.use("*",cors({
 
 //Import all routes
 const auth = require('./routes/auth');
+const event = require('./routes/event');
+
 
 
 app.use('/api/v1', auth);
+app.use('/api/v1', event);
+
 
 
 //middleware to handle error
