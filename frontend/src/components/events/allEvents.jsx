@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { load_events } from '../../actions/eventActions';
-import Event from './event';
+import Event from './Event';
 import { useParams } from 'react-router';
 
 
