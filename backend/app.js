@@ -14,6 +14,7 @@ app.use(bodyParser.json({ limit: "10mb"}));
 
 app.use("*",cors({
     origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
 }));
 
