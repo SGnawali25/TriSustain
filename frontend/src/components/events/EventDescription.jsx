@@ -29,7 +29,7 @@ const EventDescription = () => {
       const userId = user._id; 
       const eventId = event._id; 
   
-      const response = await axios.post(`https://trisustainapi.sandeshgnawali.com.np/api/v1/user/${userId}/event/${eventId}`, {
+      const response = await axios.post(`https://trisustain.vercel.app/api/v1/user/${userId}/event/${eventId}`, {
         userId,
         eventId,
       });

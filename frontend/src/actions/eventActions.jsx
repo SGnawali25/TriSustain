@@ -30,7 +30,7 @@ export const create_event = (props) => async (dispatch) => {
             withCredentials: true,
         }
 
-        const {data} = await axios.post(`https://trisustainapi.sandeshgnawali.com.np/api/v1/register/event`, {name, eventStartDate, eventEndDate, host, location, description, xToEarn, price, eventType} ,  config)
+        const {data} = await axios.post(`https://trisustain.vercel.app/api/v1/register/event`, {name, eventStartDate, eventEndDate, host, location, description, xToEarn, price, eventType} ,  config)
 
         dispatch({
             type: CREATE_EVENT_SUCCESS,
@@ -54,7 +54,7 @@ export const load_events = () => async (dispatch) => {
         dispatch({type: LOAD_EVENTS_LOADING})
 
 
-        const {data} = await axios.get(`https://trisustainapi.sandeshgnawali.com.np/api/v1/events`);
+        const {data} = await axios.get(`https://trisustain.vercel.app/api/v1/events`);
 
         dispatch({
             type: LOAD_EVENTS_SUCCESS,
@@ -77,7 +77,7 @@ export const load_event = (id) => async (dispatch) => {
 
         dispatch({type: LOAD_EVENT_LOADING})
 
-        const {data} = await axios.get(`https://trisustainapi.sandeshgnawali.com.np/api/v1/event/${id}`);
+        const {data} = await axios.get(`https://trisustain.vercel.app/api/v1/event/${id}`);
 
         dispatch({
             type: LOAD_EVENT_SUCCESS,
