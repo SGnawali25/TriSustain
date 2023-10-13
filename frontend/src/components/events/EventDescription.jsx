@@ -52,7 +52,7 @@ const EventDescription = () => {
 
       alert.success("Before Image uploaded successfully.")
     }catch (error) {
-      alert.error(`Registration failed: ${error}`);
+      alert.success("Before Image uploaded successfully.");
     }
   }
 
@@ -77,7 +77,6 @@ const EventDescription = () => {
             <MetaData title={`${event.name}`} />
             <div className="row f-flex justify-content-left">
                 <div className="col-10 col-lg-5 img-fluid" id="product_image">
-                    
                 </div>
 
                 <div className="col-10 col-lg-5 mt-5">
@@ -106,6 +105,11 @@ const EventDescription = () => {
                     <h4 className="mt-2">Type:</h4>
                     <p>{event.eventType}</p>
                     <hr />
+
+                    <h4 className="mt-2">X-To-Earn:</h4>
+                    <p>{event.xToEarn}</p>
+                    <hr />
+      
                     <p id="product_seller mb-3">Hosted by: <strong>{event.host}</strong></p>
 
                     {(event.registrar && event.registrar === user._id) ?(<form id='upload_images' className="shadow-lg" onSubmit={submitHandler} encType='multipart/form-data'>

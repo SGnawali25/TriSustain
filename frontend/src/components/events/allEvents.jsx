@@ -20,6 +20,8 @@ const allEvents = () => {
   return (
     <Fragment>
         <div className="events">
+          <h1>{params.type}</h1>
+          <div></div>
             {events && events.map(event => (
                                                 <Event key={event._id} id = {event._id} event={event} col={4}  name = {event.name}/>
                                             ))}
