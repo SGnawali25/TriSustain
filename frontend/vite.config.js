@@ -1,7 +1,5 @@
 import react from '@vitejs/plugin-react'
 
-import { backendUrl } from './config.js';
-
 // https://vitejs.dev/config/
 export default {
   build: {
@@ -15,7 +13,7 @@ export default {
   server: {
     proxy: {
       '/api': {
-        target: "http://localhost:4000/",
+        target: "https://trisustain.vercel.app/",
         changeOrigin: true,
       },
     }

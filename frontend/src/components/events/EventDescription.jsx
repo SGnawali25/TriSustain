@@ -29,12 +29,11 @@ const EventDescription = () => {
       const userId = user._id; 
       const eventId = event._id; 
   
-      const response = await axios.post(`/api/v1/user/${userId}/event/${eventId}`, {
+      const response = await axios.post(`https://trisustain.vercel.app/api/v1/user/${userId}/event/${eventId}`, {
         userId,
         eventId,
       });
 
-      const check = await axios.post(`/api/v1/event/registration`,{eventId, userId})
       alert.success("Registered successfully")
       dispatch(load_event(params.id));
       

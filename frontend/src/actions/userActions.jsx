@@ -28,7 +28,7 @@ export const login = (email, password) => async (dispatch) => {
             withCredentials: true,
         }
 
-        const {data} = await axios.post(`/api/v1/login`, {email, password} ,  config)
+        const {data} = await axios.post(`https://trisustain.vercel.app/api/v1/login`, {email, password} ,  config)
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -56,7 +56,7 @@ export const register = (name, email, password, role) => async(dispatch) => {
             },
             withCredentials: true,
         }
-        const {data} = await axios.post(`/api/v1/register`,{name, email, password, role}, config);
+        const {data} = await axios.post(`https://trisustain.vercel.app/api/v1/register`,{name, email, password, role}, config);
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
@@ -81,7 +81,7 @@ export const loadUser = () => async(dispatch) => {
 
         const config = {withCredentials: true}
 
-        const {data} = await axios.get(`/api/v1/me`, config);
+        const {data} = await axios.get(`https://trisustain.vercel.app/api/v1/me`, config);
 
         dispatch({
             type: LOAD_USER_SUCCESS,
@@ -107,7 +107,7 @@ export const logout = () => async(dispatch) => {
 
         const config = {withCredentials: true}
 
-        await axios.get(`/api/v1/logout`, config);
+        await axios.get(`https://trisustain.vercel.app/api/v1/logout`, config);
 
         dispatch({
             type: LOGOUT_SUCCESS,
