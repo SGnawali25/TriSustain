@@ -111,7 +111,7 @@ exports.uploadFirstPicInEvent = catchAsyncErrors( async(req, res, next) => {
         }
 
 
-    const readableStreamForFile = fs.createReadStream("profile.png");
+    const readableStreamForFile = fs.createReadStream(imageOne);
     const options = {
         pinataMetadata: {
             name: "TempImage",
